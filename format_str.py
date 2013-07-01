@@ -5,9 +5,11 @@ def to_upper_unaccent(val):
     separator = prog.search(uval)
     items = [uval]
     ret = []
+    sep = ''
     if separator:
         items = prog.split(uval)
+        sep = separator.group(0)
     for item in items:
         ret.append(''.join([x for x in unicodedata.normalize('NFKD',item) if unicodedata.category(x)[0] == 'L']))
-    ret = separator.group(0).join(ret)
+    ret = sep.join(ret)
     return ret.upper()
